@@ -1,6 +1,7 @@
 package teacher.action;
 
 import com.opensymphony.xwork2.ActionSupport;
+import teacher.pojo.TeaTest;
 
 public class TeaCourseTestAction extends ActionSupport {
 
@@ -11,5 +12,18 @@ public class TeaCourseTestAction extends ActionSupport {
 
     public String toAddTest() {
         return SUCCESS;
+    }
+
+    public String addTest()
+    {
+        TeaTest teaTest = new TeaTest();
+
+        teaTest.setQuestion(question);
+        teaTest.setChoiceA(choiceA);
+        teaTest.setChoiceB(choiceB);
+        teaTest.setChoiceC(choiceC);
+
+
+        return "";
     }
 }

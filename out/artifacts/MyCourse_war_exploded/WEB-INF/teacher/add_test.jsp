@@ -125,44 +125,49 @@
     </div>
 </nav>
 
+<div id="add-task">
+    <button id="add-task-btn" class="btn btn-block" type="button" data-toggle="modal" data-target="#myLgModal">
+        <i class="icon icon-file-text-o"></i>  添加测试</button>
 
-<div id="register-div">
-    <p id="register-title">添加试题</p>
+    <%--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myLgModal">大对话框</button>--%>
 
-    <div id="inputs">
-        <div class="input-control has-label-left-lg has-icon-right">
-            <input id="question" type="text" class="form-control" placeholder="" >
-            <label for="question" class="input-control-label-left">题目:</label>
-        </div>
-        <div class="input-control has-label-left-lg has-label-right">
-            <input id="choiceA" type="text" class="form-control" placeholder="">
-            <label for="choiceA" class="input-control-label-left">选项A:</label>
-        </div>
-        <div class="input-control has-label-left-lg has-label-right">
-            <input id="choiceB" type="text" class="form-control" placeholder="">
-            <label for="choiceB" class="input-control-label-left">选项B:</label>
-        </div>
-        <div class="input-control has-label-left-lg has-icon-right">
-            <input id="choiceC" type="text" class="form-control" placeholder="">
-            <label for="choiceC" class="input-control-label-left">选项C:</label>
-        </div>
+    <div class="modal fade" id="myLgModal">
+        <div id="inputs">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <p id="register-title">添加试题</p>
+                    <div class="input-control has-label-left-lg has-icon-right">
+                        <input id="question" type="question" class="form-control" placeholder="" >
+                        <label for="question" class="input-control-label-left">题目:</label>
+                    </div>
+                    <div class="input-control has-label-left-lg has-label-right">
+                        <input id="choiceA" type="choiceA" class="form-control" placeholder="">
+                        <label for="choiceA" class="input-control-label-left">选项A:</label>
+                    </div>
+                    <div class="input-control has-label-left-lg has-label-right">
+                        <input id="choiceB" type="choiceB" class="form-control" placeholder="">
+                        <label for="choiceB" class="input-control-label-left">选项B:</label>
+                    </div>
+                    <div class="input-control has-label-left-lg has-icon-right">
+                        <input id="choiceC" type="choiceC" class="form-control" placeholder="">
+                        <label for="choiceC" class="input-control-label-left">选项C:</label>
+                    </div>
+                    <div class="input-control has-label-left-lg has-icon-right">
+                        <input id="answer" type="answer" class="form-control" placeholder="">
+                        <label for="answer" class="input-control-label-left">答案:</label>
+                    </div>
 
-        <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-primary active">
-                <input type="radio" name="role" value="s" checked onchange="changeRole()"> A
-            </label>
-            <label class="btn btn-primary">
-                <input type="radio" name="role" value="t" onchange="changeRole()"> B
-            </label>
-            <label class="btn btn-primary">
-                <input type="radio" name="role" value="t" onchange="changeRole()"> C
-            </label>
-        </div>
+                    <input type="text" id="courseId" name="courseId" hidden="hidden" value="${teaCourse.id}">
 
-        <button class="btn btn-block btn-primary register-button" type="button" onclick="Testsubmit()">添加</button>
+
+                    <button class="btn btn-block btn-primary register-button" type="button" onclick="Testsubmit()">完成</button>
+                    <button class="btn btn-block btn-primary register-button" type="button" onclick="nextQ()">下一题</button>
+
+                </div>
+            </div>
+        </div>
     </div>
 
-</div>
 
 </div>
 
@@ -197,8 +202,40 @@
             ok = false;
         }
 
+        var answer = $('#answer');
+        if (answer.val().trim() === '') {
+            answer.val("");
+            answer.attr('placeholder', '选项不能为空');
+            ok = false;
+        }
+        else{
+            if(!checkAnswer(answer.val().trim())){
+                answer.val("");
+                answer.attr('placeholder', '选项必须填入A或B或C');
+                ok = false;
+            }
+            else
+            {
+                answer.val("");
+                answer.attr('placeholder', '格式正确');
+            }
+        }
+
         if (!ok) return;
 
+    }
+
+    function checkAnswer(str)
+    {
+        if(str == "A" || str == "B"|| str == "C"|| str == "a"|| str == "b"|| str == "c")
+            return true;
+        else
+            return false;
+    }
+
+    function nextQ()
+    {
+        return;
     }
 
 

@@ -162,6 +162,7 @@
                                 <div id="task-title">
                                     <input type="text" id="task-title-text" name="taskName" placeholder="作业名称">
                                     </div>
+<%--                                下面一句增加富文本编辑器--%>
                                 <div id="editor"></div>
                             </div>
                             <div class="panel-footer" id="add-task-panel-footer">
