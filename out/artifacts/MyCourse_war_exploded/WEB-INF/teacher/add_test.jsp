@@ -1,8 +1,4 @@
-<%--
-  User: Gao Tian
-  Date: 2019/7/19
-  Time: 22:23
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -135,6 +131,7 @@
         <div id="inputs">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
+
                     <p id="register-title">添加试题</p>
                     <div class="input-control has-label-left-lg has-icon-right">
                         <input id="question" type="question" class="form-control" placeholder="" >
@@ -159,9 +156,8 @@
 
                     <input type="text" id="courseId" name="courseId" hidden="hidden" value="${teaCourse.id}">
 
-
                     <button class="btn btn-block btn-primary register-button" type="button" onclick="Testsubmit()">完成</button>
-                    <button class="btn btn-block btn-primary register-button" type="button" onclick="nextQ()">下一题</button>
+                    <button class="btn btn-block btn-primary register-button" type="button" onclick="Testsubmit()">下一题</button>
 
                 </div>
             </div>
@@ -221,7 +217,60 @@
             }
         }
 
-        if (!ok) return;
+        return ok;
+        if (!ok)
+            return;
+
+        var data={}
+        data = { courseId: 2, testId:3,id : 1,question: question.val().trim(),
+                choiceA:choiceA.val.trim(), choiceB:choiceB.val.trim(),choiceC:choiceC.val.trim(),
+                answer:answer.val().trim()};
+
+        $.ajax({
+            type: "POST",
+            url: "/toAddTest",
+            data: data,
+            dataType: "json",
+
+            success:function(data){
+                if (data.status === 0) {
+                    new $.zui.Messager(data.msg + ', 正在跳转', {
+                        type: 'success'
+                    }).show();
+                    // if (data.data.user_role === 't')
+                    //     setTimeout('location.href = "/teacher/showCourseList.action"', 2000);
+                    // else if (data.data.user_role === 's')
+                    //     setTimeout('location.href = "/student/showCourseList.action"', 2000);
+                } else {
+                    new $.zui.Messager(data.msg , {
+                        type: 'danger'
+                    }).show();
+                }
+            },
+
+            error: function () {
+                new $.zui.Messager('网络似乎出问题了...', {
+                    type: 'danger'
+                }).show();
+            }
+
+        });
+
+        question.val("");
+        question.attr('placeholder', '');
+
+        choiceA.val("");
+        choiceA.attr('placeholder', '');
+
+        choiceB.val("");
+        choiceB.attr('placeholder', '');
+
+        choiceC.val("");
+        choiceC.attr('placeholder', '');
+
+        answer.val("");
+        answer.attr('placeholder', '');
+
 
     }
 
@@ -235,6 +284,27 @@
 
     function nextQ()
     {
+        var question = $('#question');
+        question.val("");
+        question.attr('placeholder', '');
+
+
+        var choiceA = $('#choiceA');
+        choiceA.val("");
+        choiceA.attr('placeholder', '');
+
+        var choiceB = $('#choiceB');
+        choiceB.val("");
+        choiceB.attr('placeholder', '');
+
+        var choiceC = $('#choiceC');
+        choiceC.val("");
+        choiceC.attr('placeholder', '');
+
+        var answer = $('#answer');
+        answer.val("");
+        answer.attr('placeholder', '');
+
         return;
     }
 

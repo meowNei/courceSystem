@@ -2,9 +2,9 @@ package teacher.pojo;
 
 public class TeaTest {
 
-    private Integer id;
-    private Integer testId;
-    private Integer courseId;
+    private Integer id; //指题目编号
+    private Integer testId; //测试编号
+    private Integer courseId; //课程编号
 
     private String question;
     private String choiceA;
