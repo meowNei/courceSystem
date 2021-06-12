@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="teacher.mapper.TeaCourseTestMapper">
+    <resultMap id="tTestMap" type="teacher.pojo.TeaTest">
+        <id property="courseId" column="course_id"/>
+        <id property="testId" column="test_id"/>
+        <id property="id" column="id_to_check"/>
+
+        <result property="question" column="question"/>
+        <result property="choiceA" column="choiceA"/>
+        <result property="choiceB" column="choiceB"/>
+        <result property="choiceC" column="choiceC"/>
+        <result property="choiceD" column="choiceD"/>
+        <result property="answer" column="answer"/>
+    </resultMap>
+
+<!--    <select id="selectAllByCourseId" resultMap="tTaskMap">-->
+<!--        select id, course_id, title, content, deadline, writer_id, create_time, update_time-->
+<!--        from task-->
+<!--        where course_id = #{courseId}-->
+<!--        order by update_time desc-->
+<!--    </select>-->
+
+<!--    <select id="selectByTaskId" resultMap="tTaskMap">-->
+<!--        select id, course_id, title, content, deadline, writer_id, create_time, update_time-->
+<!--        from task-->
+<!--        where id = #{taskId}-->
+<!--    </select>-->
+
+    <insert id="insertTest" useGeneratedKeys="true" keyProperty="id">
+        insert into test(course_id, test_id,id_to_check,question,choiceA,choiceB,choiceC,answer)
+        values (#{courseId}, #{testId}, #{id}, #{question}, #{choiceA}, #{choiceB}, #{choiceC},#{answer})
+    </insert>
+
+<!--    <update id="updateTask">-->
+<!--        update task-->
+<!--        set course_id = #{courseId}, title = #{title}, content = #{content}, deadline = #{deadline},-->
+<!--            writer_id = #{writerId}, create_time = #{createTime}, update_time = #{updateTime}-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+<!--    <delete id="deleteTask">-->
+<!--        delete-->
+<!--        from task-->
+<!--        where id = #{taskId}-->
+<!--    </delete>-->
+
+</mapper>

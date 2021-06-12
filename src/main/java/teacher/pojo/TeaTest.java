@@ -10,6 +10,7 @@ public class TeaTest {
     private String choiceA;
     private String choiceB;
     private String choiceC;
+    private String choiceD;
     private String answer;
 
     public String getAnswer() {
@@ -75,6 +76,16 @@ public class TeaTest {
     public void setChoiceC(String choiceC) {
         this.choiceC = choiceC;
     }
+
+    public String getChoiceD() {
+        return choiceD;
+    }
+
+    public void setChoiceD(String choiceD) {
+        this.choiceD = choiceD;
+    }
+
+
 
     @Override
     public String toString() {
