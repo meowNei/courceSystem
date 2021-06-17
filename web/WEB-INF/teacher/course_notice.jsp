@@ -103,7 +103,6 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/teacher/notice.action?courseId=${teaCourse.id}"><p class="nav-p">公告</p></a></li>
                 <li><a href="/teacher/task.action?courseId=${teaCourse.id}"><p class="nav-p">作业</p></a></li>
-                <li><a href="/teacher/toAddTest.action?courseId=${teaCourse.id}"><p class="nav-p">测试</p></a></li>
                 <li><a href="/teacher/resource.action?courseId=${teaCourse.id}"><p class="nav-p">资源</p></a></li>
                 <li><a href="/teacher/student.action?courseId=${teaCourse.id}"><p class="nav-p">学生</p></a></li>
             </ul>

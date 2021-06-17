@@ -25,8 +25,8 @@
 
         .login {
             width: 500px;
-            height: 500px;
-            background-color: #ffffff;
+            height: 400px;
+
             margin-top: 100px;
         }
 
@@ -70,12 +70,12 @@
 
         #submit {
             width: 330px;
-            margin-top: 30px;
+            margin-top: 50px;
         }
 
         #register-p {
             color: black;
-            font-size: 15px;
+            font-size: 20px;
         }
 
     </style>
@@ -115,20 +115,6 @@
             <label for="inputPassword" class="input-control-label-left">密码:</label>
         </div>
 
-        <table id="check_table">
-            <tr>
-                <td>
-                    <div class="input-control has-label-left has-label-right input-control-check">
-                        <input id="verificationCode" type="text" class="form-control input-lg" placeholder="">
-                        <label for="verificationCode" class="input-control-label-left">验证码:</label>
-                    </div>
-                </td>
-                <td>
-                    <img src="/verificationCode" alt="验证码" id="image" onclick="reload()">
-                </td>
-            </tr>
-        </table>
-
         <div id="submit-div">
             <input class="btn btn-primary" type="submit" value="登陆" id="submit" onclick="submit()">
         </div>
@@ -149,15 +135,10 @@
 
     });
 
-    function reload() {
-        $('#image').attr("src", "/verificationCode?date=" + new Date());
-        $('#verificationCode').val("");
-    }
 
     function submit() {
         var email = $('#inputEmail');
         var pass = $('#inputPassword');
-        var verificationCode = $('#verificationCode');
 
         if (email.val() === '') {
             new $.zui.Messager('email为空', {
@@ -171,18 +152,11 @@
             }).show();
             return;
         }
-        if (verificationCode.val() === '') {
-            new $.zui.Messager('验证码为空', {
-                type: 'danger'
-            }).show();
-
-            return;
-        }
 
         $.ajax({
             type: "POST",
             url: "/login",
-            data: {email: email.val(), password: pass.val(), verificationCode: verificationCode.val()},
+            data: {email: email.val(), password: pass.val()},
             dataType: "json",
 
             success: function (data) {

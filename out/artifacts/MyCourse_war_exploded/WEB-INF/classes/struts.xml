@@ -22,7 +22,7 @@
             <result>/</result>
         </action>
 
-        <action name="verificationCode" class="login.action.VerificationCodeAction" method="execute"/>
+<!--        <action name="verificationCode" class="login.action.VerificationCodeAction" method="execute"/>-->
 
         <action name="login" class="login.action.LoginAction" method="login"/>
 

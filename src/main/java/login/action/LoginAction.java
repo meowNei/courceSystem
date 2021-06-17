@@ -23,7 +23,6 @@ public class LoginAction extends ActionSupport implements ServletResponseAware {
 
     private String email;
     private String password;
-    private String verificationCode;
 
     private final LoginService loginService;
 
@@ -44,14 +43,12 @@ public class LoginAction extends ActionSupport implements ServletResponseAware {
         LoginJson loginJson = new LoginJson();
         loginJson.code = LOGIN_CODE;
         if (email == null || email.trim().length() == 0 || password == null || password.trim().length() == 0
-            || verificationCode == null || verificationCode.trim().length() == 0) {
+            ) {
             loginJson.msg = "存在空字段";
             loginJson.status = FAIL_EMPYT_PARAM;
         } else {
             Map<String, Object> session = ActionContext.getContext().getSession();
-            String realVerificationCode = (String) session.get("verificationCode");
 
-            if (verificationCode.equals(realVerificationCode)) {
                 User user = new User();
                 user.setEmail(email);
                 user.setPassword(password);
@@ -70,10 +67,6 @@ public class LoginAction extends ActionSupport implements ServletResponseAware {
                     ActionContext.getContext().getSession().put("user", user);
                 }
 
-            } else {
-                loginJson.msg = "验证码错误";
-                loginJson.status = FAIL_VERIFICATION;
-            }
         }
 
         response.setCharacterEncoding("utf-8");
@@ -106,10 +99,6 @@ public class LoginAction extends ActionSupport implements ServletResponseAware {
         this.password = password;
     }
 
-    public void setVerificationCode(String verificationCode) {
-        this.verificationCode = verificationCode;
-    }
-
     /**
      * code:登录业务代码
      * msg:消息
@@ -119,7 +108,6 @@ public class LoginAction extends ActionSupport implements ServletResponseAware {
 
     private static final int LOGIN_CODE = 1;
     private static final int SUCC_STATUS = 0;
-    private static final int FAIL_VERIFICATION = 1;
     private static final int FAIL_EMAIL_PASS = 2;
     private static final int FAIL_EMPYT_PARAM = 3;
 
